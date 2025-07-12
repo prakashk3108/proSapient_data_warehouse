@@ -1,0 +1,51 @@
+version: 2
+
+sources:
+  - name: raw
+    schema: public  # change if your schema is different
+    tables:
+
+      - name: customers
+        description: "Raw customer data from transactional system"
+        columns:
+          - name: id
+            description: "Primary key for the customer"
+            tests:
+              - not_null
+              - unique
+          - name: email
+            description: "Customer email address"
+            tests:
+              - not_null
+
+      - name: products
+        description: "Raw product catalog with product name, category, and price"
+        columns:
+          - name: id
+            description: "Primary key for the product"
+            tests:
+              - not_null
+              - unique
+          - name: price_gbp
+            description: "Price of the product in GBP"
+
+      - name: transactions
+        description: "Raw transaction logs with customer and product references"
+        columns:
+          - name: id
+            description: "Primary key for the transaction"
+            tests:
+              - not_null
+              - unique
+          - name: customer_id
+            description: "Foreign key to the customer table"
+            tests:
+              - not_null
+          - name: product_id
+            description: "Foreign key to the product table"
+            tests:
+              - not_null
+          - name: transaction_date
+            description: "Date when the transaction occurred"
+            tests:
+              - not_null

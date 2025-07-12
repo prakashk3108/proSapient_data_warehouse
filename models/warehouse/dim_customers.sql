@@ -1,0 +1,10 @@
+SELECT
+    customer_id,
+    first_name,
+    last_name,
+    email,
+    gender,
+    age,
+    country,
+    signup_date
+FROM {{ ref('stg_customers') }}

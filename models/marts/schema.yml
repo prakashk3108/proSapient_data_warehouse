@@ -1,0 +1,38 @@
+version: 2
+
+models:
+
+  - name: dim_customers
+    description: "Customer dimension table from staging"
+    columns:
+      - name: customer_id
+        description: "Primary key for the customer"
+        tests: [not_null, unique]
+      - name: country
+        description: "Customer's country"
+
+  - name: dim_products
+    description: "Product dimension table from staging"
+    columns:
+      - name: product_id
+        description: "Primary key for the product"
+        tests: [not_null, unique]
+      - name: category
+        description: "Product category"
+      - name: price_gbp
+        description: "Price of the product"
+
+  - name: fct_transactions
+    description: "Fact table with transaction data"
+    columns:
+      - name: transaction_id
+        description: "Primary key for the transaction"
+        tests: [not_null, unique]
+      - name: customer_id
+        description: "Foreign key to customer"
+        tests: [not_null]
+      - name: product_id
+        description: "Foreign key to product"
+        tests: [not_null]
+      - name: transaction_amount
+        description: "Amount spent in the transaction"
